@@ -26,13 +26,14 @@ public class Mruv : MonoBehaviour
         displacement = currentSpeed * Time.deltaTime;
 
         transform.Translate(Vector3.right * displacement);
+        Debug.Log("La velocidad de persecucion es: " + currentSpeed + "");
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag == "Persecucion")
         {
-            Debug.Log("Tiempo de colisión MRUV: " + timer + " segundos");
+            Debug.Log("La velocidad de persecucion es: " + displacement + "");
         }
     }
 }

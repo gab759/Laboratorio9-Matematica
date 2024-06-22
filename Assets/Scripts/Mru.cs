@@ -7,18 +7,27 @@ public class Mru : MonoBehaviour
     [SerializeField] float velocidad = 5f;
     [SerializeField] private float timer;
 
+    private Vector3 currentDirection = Vector3.right;
+
     void Update()
     {
-        timer = timer + Time.deltaTime;
+        timer += Time.deltaTime;
         float desplazamiento = velocidad * Time.deltaTime;
-        
-        transform.Translate(Vector3.right * desplazamiento);
+
+        transform.Translate(currentDirection * desplazamiento);
     }
+        public void Move(Vector3 direction)
+    {
+        currentDirection = direction.normalized;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag == "Inicial")
         {
-            Debug.Log("Tiempo de colisión MRU: " + timer + " segundos");
+            Debug.LogError("Te demoraste en llegar al siguiente punto (MRU): " + timer + " segundos");
+            Debug.LogError("La velocidad Lineal es: " + velocidad + " segundos");
+
         }
     }
 }
